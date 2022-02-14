@@ -2,8 +2,9 @@ import pytest
 
 from sugiyama.edge import Edge
 from  sugiyama.graph  import *
-from  sugiyama.layouts import *
+from  sugiyama.sugiyamaLayout import *
 from sugiyama.vertex import Vertex
+from sugiyama.vertexViewer import VertexViewer
 
 
 @pytest.mark.xfail

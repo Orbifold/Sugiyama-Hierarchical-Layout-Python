@@ -1,6 +1,9 @@
+from sugiyama.digcoLayout import DigcoLayout
 from  sugiyama.graph  import *
-from  sugiyama.layouts import *
+from  sugiyama.sugiyamaLayout import *
 from  sugiyama.routing import *
+from sugiyama.vertexViewer import VertexViewer
+
 
 def test_splines(capsys,sample_G02):
     gr  = GraphBase(*sample_G02)

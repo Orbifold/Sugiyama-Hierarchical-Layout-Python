@@ -2,7 +2,11 @@ from  sugiyama.graph  import Graph
 from sugiyama.graphBase import GraphBase
 from sugiyama.edge import Edge
 from sugiyama.vertex import Vertex
-from  sugiyama.layouts import SugiyamaLayout,DigcoLayout,VertexViewer,Layer,DummyVertex
+from  sugiyama.sugiyamaLayout import SugiyamaLayout
+from sugiyama.digcoLayout import DigcoLayout
+from sugiyama.vertexViewer import VertexViewer
+from sugiyama.layer import Layer
+from sugiyama.dummyVertex import DummyVertex
 from sugiyama.routing import EdgeViewer, route_with_rounded_corners
 
 def test_001_Sugiyama(sample_G02):

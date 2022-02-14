@@ -2,8 +2,9 @@ import pytest
 
 import sugiyama.edge
 import sugiyama.vertex
+import sugiyama.vertexViewer
 from  sugiyama import *
-
+from sugiyama.sugiyamaLayout import SugiyamaLayout
 @pytest.mark.skipif(not utils.dot._has_ply,reason="requires ply module")
 def test_001_lexer(capsys):
     d = utils.Dot()
@@ -52,7 +53,7 @@ def test_003_dg10(sample_dg10):
                 v = sugiyama.vertex.Vertex(x.attr['label'])
             except (KeyError,AttributeError):
                 v = sugiyama.vertex.Vertex(x.name)
-            v.view = layouts.VertexViewer(10,10)
+            v.view = sugiyama.vertexViewer.VertexViewer(10, 10)
             V[x.name] = v
         edgelist = []
         for e in ast.edges: edgelist.append(e)
@@ -62,6 +63,6 @@ def test_003_dg10(sample_dg10):
             E.append(sugiyama.edge.Edge(v1, v2))
         G.append(graph.Graph(V.values(),E))
         for gr in G[-1].C:
-            sug = layouts.SugiyamaLayout(gr)
+            sug = SugiyamaLayout(gr)
             sug.init_all()
             sug.draw()
