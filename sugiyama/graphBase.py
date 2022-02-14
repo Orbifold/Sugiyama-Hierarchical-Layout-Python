@@ -46,7 +46,7 @@ class GraphBase(object):
            marking the edges with a "feedback" flag.
            Complexity is O(V+E).
          partition(): returns a *partition* of the connected graph as a list of lists.
-         N(v): returns neighbours of a vertex v.
+         neighbors(v): returns neighbours of a vertex v.
     """
 
     def __init__(self, V=None, E=None, directed=True):
@@ -73,7 +73,7 @@ class GraphBase(object):
             if x is None or y is None:
                 raise ValueError("unknown Vertex (%s or %s)" % e.v)
             e.v = (x, y)
-            if e.deg == 0:
+            if e.degree == 0:
                 self.degenerated_edges.add(e)
             e = self.sE.add(e)
             e.attach()
@@ -121,7 +121,7 @@ class GraphBase(object):
         e = self.sE.add(e)
         x.c = self
         y.c = self
-        if e.deg == 0:
+        if e.degree == 0:
             self.degenerated_edges.add(e)
         return e
 
@@ -130,7 +130,7 @@ class GraphBase(object):
             return
         e.detach()
         # check if still connected (path is not oriented here):
-        if e.deg == 1 and not self.path(e.v[0], e.v[1]):
+        if e.degree == 1 and not self.path(e.v[0], e.v[1]):
             # return to inital state by reconnecting everything:
             e.attach()
             # exit with exception!
@@ -144,7 +144,7 @@ class GraphBase(object):
     def remove_vertex(self, x):
         if x not in self.sV:
             return
-        V = x.N()  # get all neighbor vertices to check paths
+        V = x.neighbors()  # get all neighbor vertices to check paths
         E = x.detach()  # remove the edges from x and neighbors list
         # now we need to check if all neighbors are still connected,
         # and it is sufficient to check if one of them is connected to
@@ -203,13 +203,13 @@ class GraphBase(object):
         return len(self.sE)
 
     def deg_min(self):
-        return min([v.deg() for v in self.sV])
+        return min([v.degree() for v in self.sV])
 
     def deg_max(self):
-        return max([v.deg() for v in self.sV])
+        return max([v.degree() for v in self.sV])
 
     def deg_avg(self):
-        return sum([v.deg() for v in self.sV]) / float(self.order())
+        return sum([v.degree() for v in self.sV]) / float(self.order())
 
     def eps(self):
         return float(self.norm()) / self.order()
@@ -235,7 +235,7 @@ class GraphBase(object):
         q = [x]
         while (not p) and len(q) > 0:
             c = q.pop(0)
-            for n in c.N(f_io):
+            for n in c.neighbors(f_io):
                 if not n in v:
                     hook(n)
                     v[n] = c
@@ -349,18 +349,18 @@ class GraphBase(object):
         while len(R) > 0:
             v = R.pop(0)
             p = Poset([v])
-            l = v.N(+1)
+            l = v.neighbors(+1)
             while len(l) > 0:
                 x = l.pop(0)
                 if x in p:
                     continue
-                if all([(y in p) for y in x.N(-1)]):
+                if all([(y in p) for y in x.neighbors(-1)]):
                     p.add(x)
                     if x in R:
                         R.remove(x)
                     else:
                         V.remove(x)
-                    l.extend(x.N(+1))
+                    l.extend(x.neighbors(+1))
                 else:
                     if x in V:
                         V.remove(x)
@@ -369,7 +369,7 @@ class GraphBase(object):
         return parts
 
     def N(self, v, f_io=0):
-        return v.N(f_io)
+        return v.neighbors(f_io)
 
     # general graph properties:
     # -------------------------

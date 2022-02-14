@@ -7,6 +7,7 @@ from sugiyama.vertex import Vertex
 
 
 @pytest.mark.xfail
+@pytest.mark.skip(reason="to reconsider")
 def test_recurs():
     # Note, this is failing for me (fabioz) with: RuntimeError: maximum recursion depth exceeded in cmp
     # => adjusting recursion depth dynamically works only with CPython

@@ -5,12 +5,12 @@ class VertexBase(object):
             e (list[Edge]): list of edges associated with this vertex.
 
         Methods:
-            deg() : degree of the vertex (number of edges).
+            degree() : degree of the vertex (number of edges).
             e_in() : list of edges directed toward this vertex.
             e_out(): list of edges directed outward this vertex.
             e_dir(int): either e_in, e_out or all edges depending on
                provided direction parameter (>0 means outward).
-            N(f_io=0): list of neighbor vertices in all directions (default)
+            neighbors(f_io=0): list of neighbor vertices in all directions (default)
                or in filtered f_io direction (>0 means outward).
             e_to(v): returns the Edge from this vertex directed toward vertex v.
             e_from(v): returns the Edge from vertex v directed toward this vertex.
@@ -23,7 +23,7 @@ class VertexBase(object):
         # will hold list of edges for this vertex (adjacency list)
         self.e = []
 
-    def deg(self):
+    def degree(self):
         return len(self.e)
 
     def e_in(self):
@@ -39,7 +39,7 @@ class VertexBase(object):
             return self.e_in()
         return self.e
 
-    def N(self, f_io=0):
+    def neighbors(self, f_io=0):
         N = []
         if f_io <= 0:
             N += [e.v[0] for e in self.e_in()]
@@ -69,5 +69,5 @@ class VertexBase(object):
         E = self.e[:]
         for e in E:
             e.detach()
-        assert self.deg() == 0
+        assert self.degree() == 0
         return E

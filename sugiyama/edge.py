@@ -34,7 +34,7 @@ class Edge(EdgeBase):
             self.v[1].e.append(self)
 
     def detach(self):
-        if self.deg == 1:
+        if self.degree == 1:
             assert self in self.v[0].e
             assert self in self.v[1].e
             self.v[0].e.remove(self)
@@ -64,4 +64,4 @@ class Edge(EdgeBase):
     def __setstate__(self, state):
         xi, yi, self.w, self.data, self.feedback = state
         self._v = [xi, yi]
-        self.deg = 0 if xi == yi else 1
+        self.degree = 0 if xi == yi else 1

@@ -104,7 +104,7 @@ class DummyVertex(_sugiyama_vertex_attr):
         ctrl (list[_sugiyama_attr]): the list of associated dummy vertices
 
     Methods:
-        N(dir): reflect the Vertex method and returns the list of adjacent
+        neighbors(dir): reflect the Vertex method and returns the list of adjacent
                  vertices (possibly dummy) in the given direction.
         inner(dir): return True if a neighbor in the given direction is *dummy*.
     """
@@ -114,7 +114,7 @@ class DummyVertex(_sugiyama_vertex_attr):
         self.ctrl = None
         super().__init__(r, d=1)
 
-    def N(self, dir):
+    def neighbors(self, dir):
         assert dir == +1 or dir == -1
         v = self.ctrl.get(self.rank + dir, None)
         return [v] if v is not None else []
@@ -122,7 +122,7 @@ class DummyVertex(_sugiyama_vertex_attr):
     def inner(self, dir):
         assert dir == +1 or dir == -1
         try:
-            return any([x.dummy == 1 for x in self.N(dir)])
+            return any([x.dummy == 1 for x in self.neighbors(dir)])
         except KeyError:
             return False
         except AttributeError:
@@ -250,7 +250,7 @@ class Layer(list):
     def _neighbors(self, v):
         """
         neighbors refer to upper/lower adjacent nodes.
-        Note that v.N() provides neighbors of v in the graph, while
+        Note that v.neighbors() provides neighbors of v in the graph, while
         this method provides the Vertex and DummyVertex adjacent to v in the
         upper or lower layer (depending on layout.dirv state).
         """
@@ -260,13 +260,13 @@ class Layer(list):
         try:  # (cache)
             return grxv.nvs[dirv]
         except AttributeError:
-            grxv.nvs = {-1: v.N(-1), +1: v.N(+1)}
+            grxv.nvs = {-1: v.neighbors(-1), +1: v.neighbors(+1)}
             if grxv.dummy:
                 return grxv.nvs[dirv]
-            # v is real, v.N are graph neigbors but we need layers neighbors
+            # v is real, v.neighbors are graph neigbors but we need layers neighbors
             for d in (-1, +1):
                 tr = grxv.rank + d
-                for i, x in enumerate(v.N(d)):
+                for i, x in enumerate(v.neighbors(d)):
                     if self.layout.grx[x].rank == tr:
                         continue
                     e = v.e_with(x)
@@ -518,7 +518,7 @@ class SugiyamaLayout(object):
                 for e in v.e_out():
                     scan[e] = True
                 # check if out-vertices are rank-able:
-                for x in v.N(+1):
+                for x in v.neighbors(+1):
                     if not (False in [scan.get(e, False) for e in x.e_in()]):
                         if x not in l:
                             l.append(x)
@@ -533,8 +533,8 @@ class SugiyamaLayout(object):
         for l in reversed(self.layers):
             for v in l:
                 gv = self.grx[v]
-                for x in v.N(-1):
-                    if all((self.grx[y].rank >= gv.rank for y in x.N(+1))):
+                for x in v.neighbors(-1):
+                    if all((self.grx[y].rank >= gv.rank for y in x.neighbors(+1))):
                         gx = self.grx[x]
                         self.layers[gx.rank].remove(x)
                         gx.rank = gv.rank - 1
@@ -545,7 +545,7 @@ class SugiyamaLayout(object):
            The Layer is created if it is the first vertex with this rank.
         """
         assert self.dag
-        r = max([self.grx[x].rank for x in v.N(-1)] + [-1]) + 1
+        r = max([self.grx[x].rank for x in v.neighbors(-1)] + [-1]) + 1
         self.grx[v].rank = r
         # add it to its layer:
         try:
@@ -680,7 +680,7 @@ class SugiyamaLayout(object):
                 if l1 == last or v.inner(-1):
                     k1 = k1_init
                     if v.inner(-1):
-                        k1 = self.grx[v.N(-1)[-1]].pos
+                        k1 = self.grx[v.neighbors(-1)[-1]].pos
                     for vl in L[l : l1 + 1]:
                         for vk in L._neighbors(vl):
                             k = self.grx[vk].pos

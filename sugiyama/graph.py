@@ -179,7 +179,7 @@ class Graph(object):
     def deg_avg(self):
         t = 0.0
         for c in self.C:
-            t += sum([v.deg() for v in c.sV])
+            t += sum([v.degree() for v in c.sV])
         return t / float(self.order())
 
     def eps(self):
@@ -194,7 +194,7 @@ class Graph(object):
         return x.c.path(x, y, f_io, hook)
 
     def N(self, v, f_io=0):
-        return v.N(f_io)
+        return v.neighbors(f_io)
 
     def __contains__(self, G):
         r = False
