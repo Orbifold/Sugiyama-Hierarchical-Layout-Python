@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# grandalf documentation build configuration file, created by
+# sugiyama documentation build configuration file, created by
 # sphinx-quickstart on Thu Sep 24 12:49:42 2015.
 #
 # This file is execfile()d with the current directory set to its
@@ -18,7 +18,7 @@ import os
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
-sys.path.insert(0, os.path.abspath('../grandalf'))
+sys.path.insert(0, os.path.abspath('../sugiyama'))
 
 # -- General configuration ------------------------------------------------
 
@@ -51,7 +51,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'grandalf'
+project = u'sugiyama'
 copyright = u'2018, bdcht'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -212,7 +212,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  ('index', 'grandalf.tex', u'grandalf Documentation',
+  ('index', 'sugiyama.tex', u'sugiyama Documentation',
    u'bdcht', 'manual'),
 ]
 
@@ -242,7 +242,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'grandalf', u'grandalf Documentation',
+    ('index', 'sugiyama', u'sugiyama Documentation',
      [u'bdcht'], 1)
 ]
 
@@ -256,8 +256,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'grandalf', u'grandalf Documentation',
-   u'bdcht', 'grandalf', 'One line description of project.',
+  ('index', 'sugiyama', u'sugiyama Documentation',
+   u'bdcht', 'sugiyama', 'One line description of project.',
    'Miscellaneous'),
 ]
 

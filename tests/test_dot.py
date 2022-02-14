@@ -1,8 +1,8 @@
 import pytest
 
-import grandalf.edge
-import grandalf.vertex
-from  grandalf import *
+import sugiyama.edge
+import sugiyama.vertex
+from  sugiyama import *
 
 @pytest.mark.skipif(not utils.dot._has_ply,reason="requires ply module")
 def test_001_lexer(capsys):
@@ -49,9 +49,9 @@ def test_003_dg10(sample_dg10):
         E = []
         for k,x in ast.nodes.items():
             try:
-                v = grandalf.vertex.Vertex(x.attr['label'])
+                v = sugiyama.vertex.Vertex(x.attr['label'])
             except (KeyError,AttributeError):
-                v = grandalf.vertex.Vertex(x.name)
+                v = sugiyama.vertex.Vertex(x.name)
             v.view = layouts.VertexViewer(10,10)
             V[x.name] = v
         edgelist = []
@@ -59,7 +59,7 @@ def test_003_dg10(sample_dg10):
         for edot in edgelist:
             v1 = V[edot.n1.name]
             v2 = V[edot.n2.name]
-            E.append(grandalf.edge.Edge(v1, v2))
+            E.append(sugiyama.edge.Edge(v1, v2))
         G.append(graph.Graph(V.values(),E))
         for gr in G[-1].C:
             sug = layouts.SugiyamaLayout(gr)

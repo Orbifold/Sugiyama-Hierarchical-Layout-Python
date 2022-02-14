@@ -1,5 +1,5 @@
-from grandalf.utils import Poset
-from grandalf.vertex import Vertex
+from sugiyama.utils import Poset
+from sugiyama.vertex import Vertex
 
 
 class GraphBase(object):

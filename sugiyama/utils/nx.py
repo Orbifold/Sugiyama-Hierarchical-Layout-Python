@@ -10,8 +10,8 @@ __all__ = [
 
 # Some utilities to interact with networkx.
 
-# Converts a grandalf graph to a networkx graph.
-# Note that the edge concept is the same, but a vertex in grandalf is called a node in networkx.
+# Converts a sugiyama graph to a networkx graph.
+# Note that the edge concept is the same, but a vertex in sugiyama is called a node in networkx.
 def convert_grandalf_graph_to_networkx_graph(G):
     from networkx import MultiDiGraph
 
@@ -23,12 +23,12 @@ def convert_grandalf_graph_to_networkx_graph(G):
     return nxg
 
 
-# Converts a networkx graph to a grandalf graph.
-# Note that the edge concept is the same, but a vertex in grandalf is called a node in networkx.
+# Converts a networkx graph to a sugiyama graph.
+# Note that the edge concept is the same, but a vertex in sugiyama is called a node in networkx.
 def convert_nextworkx_graph_to_grandalf(G):
-    from grandalf.graph import Graph
-    from grandalf.edge import Edge
-    from grandalf.vertex import Vertex
+    from sugiyama.graph import Graph
+    from sugiyama.edge import Edge
+    from sugiyama.vertex import Vertex
 
     V = []
     data_to_V = {}

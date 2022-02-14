@@ -1,5 +1,5 @@
 import pytest
-from grandalf.utils.linalg import *
+from sugiyama.utils.linalg import *
 
 def test_linalg_001():
     assert coerce_(None) == ('i',int)

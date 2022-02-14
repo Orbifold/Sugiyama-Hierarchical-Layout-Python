@@ -1,6 +1,6 @@
-from grandalf.edge import Edge
-from grandalf.graph import *
-from grandalf.vertex import Vertex
+from sugiyama.edge import Edge
+from sugiyama.graph import *
+from sugiyama.vertex import Vertex
 
 V = [Vertex("b%d"%n) for n in range(1,16)]
 

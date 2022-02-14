@@ -1,0 +1,6 @@
+Faker==12.3.3
+networkx==2.6.3
+numpy==1.22.2
+pandas==1.4.1
+pytest==7.0.1
+ply==3.11

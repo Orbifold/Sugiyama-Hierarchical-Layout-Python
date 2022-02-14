@@ -1,6 +1,6 @@
-from  grandalf.graph  import *
-from  grandalf.layouts import *
-from  grandalf.routing import *
+from  sugiyama.graph  import *
+from  sugiyama.layouts import *
+from  sugiyama.routing import *
 
 def test_splines(capsys,sample_G02):
     gr  = GraphBase(*sample_G02)

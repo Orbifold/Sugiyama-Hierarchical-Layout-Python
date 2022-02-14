@@ -1,9 +1,9 @@
 import pytest
 
-from grandalf.edge import Edge
-from  grandalf.graph  import *
-from  grandalf.layouts import *
-from grandalf.vertex import Vertex
+from sugiyama.edge import Edge
+from  sugiyama.graph  import *
+from  sugiyama.layouts import *
+from sugiyama.vertex import Vertex
 
 
 @pytest.mark.xfail

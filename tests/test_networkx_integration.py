@@ -1,9 +1,9 @@
 import pytest
 
-from grandalf.graph import Graph
-from grandalf.edge import Edge
-from grandalf.vertex import Vertex
-from grandalf.utils.nx import *
+from sugiyama.graph import Graph
+from sugiyama.edge import Edge
+from sugiyama.vertex import Vertex
+from sugiyama.utils.nx import *
 
 def test_networkx():
     try:
@@ -27,7 +27,7 @@ def test_networkx():
     assert nx_graph.number_of_edges() == len(E)
     assert nx_graph.number_of_nodes() == len(V)
 
-    # Now, let's go back from networkx to grandalf
+    # Now, let's go back from networkx to sugiyama
     grandalf_graph = convert_nextworkx_graph_to_grandalf(nx_graph)
 
     assert len(list(grandalf_graph.V())) == len(v)

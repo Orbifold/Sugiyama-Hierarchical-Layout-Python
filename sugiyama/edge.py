@@ -1,4 +1,4 @@
-from grandalf.edgeBase import EdgeBase
+from sugiyama.edgeBase import EdgeBase
 
 
 class Edge(EdgeBase):

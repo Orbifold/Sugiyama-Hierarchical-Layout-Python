@@ -1,4 +1,4 @@
-from grandalf.vertexBase import VertexBase
+from sugiyama.vertexBase import VertexBase
 
 
 class Vertex(VertexBase):
@@ -22,7 +22,7 @@ class Vertex(VertexBase):
 
     @property
     def index(self):
-        from grandalf.graphBase import GraphBase
+        from sugiyama.graphBase import GraphBase
         if self.__index:
             return self.__index
         elif isinstance(self.c, GraphBase):

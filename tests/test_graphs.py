@@ -1,11 +1,11 @@
 from pickle import dumps,loads,HIGHEST_PROTOCOL
 
-from grandalf.edge import Edge
-from grandalf.vertex import Vertex
+from sugiyama.edge import Edge
+from sugiyama.vertex import Vertex
 
 pickler = lambda x: dumps(x,HIGHEST_PROTOCOL)
 
-from  grandalf.graph import *
+from  sugiyama.graph import *
 
 def  test_vertex():
     v1 = Vertex()
@@ -139,7 +139,7 @@ def test_Matrix(sample_G06):
     assert len(G.C)==1
     g = G.C[0]
     M = g.M()
-    from grandalf.utils.linalg import matrix
+    from sugiyama.utils.linalg import matrix
     M = matrix(M)
     S = M+M.transpose()
     assert S.sum()==0

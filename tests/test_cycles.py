@@ -1,19 +1,19 @@
 import pytest
 
-import grandalf.edge
-import grandalf.vertex
-from grandalf import *
+import sugiyama.edge
+import sugiyama.vertex
+from sugiyama import *
 
 @pytest.mark.skipif(not utils.dot._has_ply,reason="requires ply module to parse dot input file")
 def test_cycles(sample_cycle):
     g = utils.Dot().read(sample_cycle)[0]
     V = {}
     for k,v in g.nodes.items():
-        V[k]= grandalf.vertex.Vertex(k)
+        V[k]= sugiyama.vertex.Vertex(k)
         V[k].view = layouts.VertexViewer(10,10)
     E = []
     for e in g.edges:
-        E.append(grandalf.edge.Edge(V[e.n1.name], V[e.n2.name]))
+        E.append(sugiyama.edge.Edge(V[e.n1.name], V[e.n2.name]))
 
     G = graph.Graph(V.values(), E)
     assert len(G.C)==1
@@ -46,12 +46,12 @@ def test_cycles(sample_cycle):
 def test_longcycle():
     V = {}
     for x in 'abcdefgh':
-        v = grandalf.vertex.Vertex(x)
+        v = sugiyama.vertex.Vertex(x)
         v.view = layouts.VertexViewer()
         V[x] = v
     E = []
     for e in ('ab','bc','cd','de','eb','bf','dg','gh','fh'):
-        E.append(grandalf.edge.Edge(V[e[0]], V[e[1]]))
+        E.append(sugiyama.edge.Edge(V[e[0]], V[e[1]]))
     G = graph.Graph(V.values(), E)
     l = layouts.SugiyamaLayout(G.C[0])
     l.init_all()
